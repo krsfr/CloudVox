@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+cc415d2d0736ce6540ce3987fbe59d88 CloudVox_artefacts/JuceLibraryCode/CloudVox_AU/PkgInfo
+6b5df7dc7af68efbb7b832213f36b4a8 CloudVox_artefacts/JuceLibraryCode/CloudVox_Standalone/PkgInfo
+1508a1559177b68c3e6df24750000e88 CloudVox_artefacts/JuceLibraryCode/CloudVox_VST3/PkgInfo

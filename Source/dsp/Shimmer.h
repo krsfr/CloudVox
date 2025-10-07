@@ -2,6 +2,8 @@
 
 #include <juce_dsp/juce_dsp.h>
 
+#include "PitchShifter.h"
+
 namespace cloudvox::dsp
 {
 class Shimmer
@@ -21,7 +23,7 @@ private:
     juce::dsp::Reverb reverb;
     juce::dsp::Reverb::Parameters reverbParams;
     juce::dsp::DelayLine<float, juce::dsp::DelayLineInterpolationTypes::Linear> preDelay { 48000 };
-    juce::dsp::PitchShifter<float> pitchShifter;
+    PitchShifter pitchShifter;
 
     juce::AudioBuffer<float> tempBuffer;
     float mix = 0.5f;

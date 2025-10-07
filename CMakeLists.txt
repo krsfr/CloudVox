@@ -5,6 +5,10 @@ project(CloudVox VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(APPLE AND NOT DEFINED CMAKE_OSX_DEPLOYMENT_TARGET)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "14.4" CACHE STRING "Minimum macOS deployment version" FORCE)
+endif()
+
 # JUCE is expected to be available via FetchContent or as a submodule
 include(FetchContent)
 
@@ -12,7 +16,7 @@ if(NOT DEFINED JUCE_SOURCE_DIR)
     FetchContent_Declare(
         juce
         GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-        GIT_TAG 7.0.12
+        GIT_TAG 8.0.10
     )
     FetchContent_MakeAvailable(juce)
 endif()
@@ -64,16 +68,11 @@ target_compile_definitions(CloudVox
         JUCE_VST3_CAN_REPLACE_VST2=0
 )
 
-juce_add_binary_data(CloudVoxData SOURCES)
-
 target_link_libraries(CloudVox
     PRIVATE
-        CloudVoxData
         juce::juce_audio_utils
         juce::juce_audio_processors
         juce::juce_dsp
         juce::juce_gui_extra
         juce::juce_audio_plugin_client
 )
-
-juce_enable_vst3_compatibility_warnings(CloudVox)

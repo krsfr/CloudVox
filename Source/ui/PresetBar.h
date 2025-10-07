@@ -49,7 +49,7 @@ public:
     void buttonClicked(juce::Button* button) override
     {
         const int index = buttons.indexOf(static_cast<juce::TextButton*>(button));
-        if (isPositiveAndBelow(index, presetIdentifiers.size()))
+        if (juce::isPositiveAndBelow(index, presetIdentifiers.size()))
             listeners.call([&](Listener& l) { l.presetSelected(presetIdentifiers[index]); });
     }
 

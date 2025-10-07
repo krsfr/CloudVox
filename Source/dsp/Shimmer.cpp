@@ -7,6 +7,7 @@ void Shimmer::prepare(const juce::dsp::ProcessSpec& spec)
     sampleRate = spec.sampleRate;
     reverb.prepare(spec);
     preDelay.setMaximumDelayInSamples(static_cast<int>(sampleRate * 0.2));
+    preDelay.prepare(spec);
     preDelay.reset();
     pitchShifter.prepare(spec);
     pitchShifter.setPitchRatio(2.0f); // +12 semitones
@@ -76,8 +77,7 @@ void Shimmer::process(juce::AudioBuffer<float>& buffer)
             const float baseWet = wet[sample];
             const float delayed = preDelay.popSample(channel);
             preDelay.pushSample(channel, baseWet + feedback * delayed);
-            const float pitched = pitchShifter.processSample(channel, delayed);
-            const float shimmerSample = mix * pitched;
+            const float shimmerSample = mix * delayed;
             const float baseMix = (1.0f - mix) * baseWet;
             wet[sample] = dry[sample] + baseMix + shimmerSample;
         }
